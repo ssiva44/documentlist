@@ -1,0 +1,156 @@
+
+<div class="row">
+    <div class="col-lg-3 col-md-3 col-xs-12 hidden-sm hidden-xs" [ngClass]="{'left-section': isFacetsCollapsed}">
+        <div id="wrapper" [ngClass]="{'toggled-2': isFacetsCollapsed}">
+            <button class="sidebar-toggle" (click)="updateFacetsCollapsed(!isFacetsCollapsed)"> 
+                <i class="sidebar-arrow" [ngClass]="sideBarArrow"></i>
+            </button> 
+            <div id="sidebar-wrapper">
+                <div class="sidebar-heading">
+                    <i class="fa fa-list-ul"></i>
+                    <h4 class="h4">{{'filter' | i18n : i18nService}}</h4>
+                    <div class="clear-all"><input class="reset-btn" type="reset" value="{{'clearAll' | i18n : i18nService}} x" (click)="onClearAll()"></div>
+
+                    <date #date [locale]="locale" [isClearAll]="isClearAll" [queryParameters]="queryParameters" (selectedDateRange)="updateDates($event.startDate, $event.endDate)" (selectedDateRange)="mobileFacets.onSeletedDates($event.startDate, $event.endDate)" ></date>
+
+                    <facets #facet [locale]="locale" [isClearAll]="isClearAll" [facetsIn]="facets" [queryParameters]="queryParameters" (selectedFacetsOut)="updateFacets($event)" (selectedFacetsOut)="mobileFacets.getSelectedFacets($event)"></facets>
+                </div>
+            </div>                           
+        </div>                        
+    </div>
+    
+    <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" [ngClass]="{'right-section': isFacetsCollapsed}">
+        <div class="row hidden-sm">
+            <div class="heading-v1">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <h2>{{'title' | i18n : i18nService}}</h2>
+                </div>
+            </div>            
+        </div>
+        <div class="row hidden-sm">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="listing_search">
+                    <div class="row">
+                        <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12">
+                            <div class="header-search-section">
+                                <form class="input-group has-feedback" (ngSubmit)="onSearch()">
+                                    <input type="text" class="search-input-field-1" label="search" title="search" [(ngModel)]="searchValue" [ngModelOptions]="{standalone: true}" placeholder="{{'placeholder' | i18n : i18nService}}">
+                                    <i class="fa fa-search search-submit-icon search-comp" (click)="onSearch()"></i>			    	
+                                </form>	
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12">
+                            <span class="dr-advancesearch-checkbox">
+                                <div class="_loop_checkbox">
+                                    <input class="_loop_primary_checkbox" type="checkbox" name="d_1" value="" (change)="onSearchIn(!isSeachIn)" />
+                                    <label for="d_1"></label> 
+                                </div>
+                                <a title="{{'searchWithIn' | i18n : i18nService}}">{{'searchWithIn' | i18n : i18nService}}</a>
+                            </span>
+                            <span class="dr-advancesearch">
+                                <a href="{{advancedSearchPath}}" title="{{'advancedSearch' | i18n : i18nService}}">{{'advancedSearch' | i18n : i18nService}}
+                                    <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+                
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" [class.hide]="!isDocuments">
+                <div class="table-heading">
+                    <h4></h4>
+                    <p class="blurb-text">{{showingDetails}} | {{'dipplayResults' | i18n : i18nService}}
+                        <span><a [class.disabled]="rows == 10" (click)="onRowSize(10)">10</a></span> |
+                        <span><a [class.disabled]="rows == 20" (click)="onRowSize(20)">20</a></span> |
+                        <span><a [class.disabled]="rows == 50" (click)="onRowSize(50)">50</a></span>
+                    </p>
+                    
+                    <div class="accordion-group-btn">
+                        <span class="blurb-text">{{'download' | i18n : i18nService}}: </span>                                
+                        <a data-customlink="fd:body content:en:pdf" (click)="onDownloadExcel(); false" class="accordion-download" data-type="word" title="Download Excel"><span><i class="fa fa-file-excel-o" aria-hidden="true"></i></span></a>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8">
+                <div class="sidebar-nav-mobile hidden-lg hidden-md" (click)="isCollapsed=!isCollapsed">
+                    <div class="sidebar-heading">
+                        <span data-target="#refine-collapse1" data-toggle="collapse" type="button" class="dropdown-toggle" aria-expanded="true">
+                        <h4 class="h4">{{'refineBy' | i18n : i18nService}}<i class="fa fa-angle-down arrow-down"></i></h4>
+                        </span>
+                    </div>
+                </div>
+            </div>
+                        
+            <mobilefacets #mobileFacets [isCollapsed]="isCollapsed" [locale]="locale" [facetsIn]="facets" (isCollapsedOut)="updateIsCollapsed($event)" (selectedDateRange)="date.onSelectedDate($event.startDate, $event.endDate)" (selectedFacet)="facet.onFacetItem($event.facet, $event.itemName)"></mobilefacets>
+
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" #scrollTo>
+                <div [class.hide]="!isDocuments" class="f05v6-sorting">
+                    <div class="pull-left clearfix">
+                        <div class="f05v6-sorting-label">{{'sortBy' | i18n : i18nService}}: </div>
+                        <ul>
+                            <li *ngIf="qterm != ''" [ngClass]="{'active-sortable': sortBy == params.SCORE_SORT}" (click)="onSort(params.SCORE_SORT, sortType)"><a data-customlink="ss:header">{{params.SCORE_SORT | i18n : i18nService}}</a></li>
+                            <li [ngClass]="{'active-sortable': sortBy == params.DOCUMENT_DATE}" (click)="onSort(params.DOCUMENT_DATE, sortType)"><a data-customlink="ss:header">{{params.DOCUMENT_DATE | i18n : i18nService}}</a></li>
+                            <li [ngClass]="{'active-sortable': sortBy == params.DISPLAY_TITLE_SORT}" (click)="onSort(params.DISPLAY_TITLE_SORT, sortType)"><a data-customlink="ss:header">{{params.DISPLAY_TITLE | i18n : i18nService}}</a></li>
+                            <li [ngClass]="{'active-sortable': sortBy == params.REPORT_NUMNER_SORT}" (click)="onSort(params.REPORT_NUMNER_SORT, sortType)"><a data-customlink="ss:header">{{params.REPORT_NUMNER | i18n : i18nService}}</a></li>
+                            <li [ngClass]="{'active-sortable': sortBy == params.DOCUMENT_TYPE_SORT}" (click)="onSort(params.DOCUMENT_TYPE_SORT, sortType)"><a data-customlink="ss:header">{{params.DOCUMENT_TYPE | i18n : i18nService}}</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div [class.hide]="isDocuments" style="font-weight: 600;" [innerHTML]="noData"></div>
+                <div [class.hide]="!isDocuments" class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="search-listing" *ngFor="let key of objectKeys(documents)">
+                            <ul>
+                                <li>
+                                    <div class="_loop_checkbox">
+                                        <input class="_loop_primary_checkbox" type="checkbox" name="{{key}}" value="{{key}}" (change)="onDocumentCheck(key)" [checked]="selectedDoucuments | objectContains : 'k_' + key" title="Check here to select document for download" />
+                                        <label for="{{key}}"></label> 
+                                    </div>
+                                    <div class="search-listing-content">
+                                        <h3>
+                                            <a data-customlink="sr:body content" href="{{documentsPath}}{{documents[key][params.URL] | url : runmode}}" [innerHtml]="(documents[key][params.DISPLAY_TITLE] | filter) + ' (' + documents[key][params.LANGUAGE] + ')'"></a>
+                                            <a><i *ngIf="documents[key][params.SERCURE_LOCK] == 'Official Use Only'" class="fa fa-lock lock-icon" aria-hidden="true"></i></a>
+                                        </h3>
+                                        <p class="blurb-text" [innerHtml]="(documents[key][params.ABSTRACTS] | filter) | limit : 200"></p>
+                                        <div class="search-listing-info">
+                                            <span class="info-list-item" [ngClass]="{'hide': (documents[key][params.DOCUMENT_TYPE] | filter) == ''}"><span class="info-list-title">{{params.DOCUMENT_TYPE | i18n : i18nService}}: </span>{{documents[key][params.DOCUMENT_TYPE] | filter}}</span>
+                                            <span class="info-list-item" [ngClass]="{'hide': (documents[key][params.REPORT_NUMNER] | filter) == ''}"><span class="info-list-title">{{params.REPORT_NUMNER | i18n : i18nService}}: </span>{{documents[key][params.REPORT_NUMNER]}}</span>
+                                            <span class="info-list-item" [ngClass]="{'hide': (documents[key][params.DOCUMENT_DATE] | filter) == ''}"><span class="info-list-title">{{params.DOCUMENT_DATE | i18n : i18nService}}: </span>{{documents[key][params.DOCUMENT_DATE] | dateFormatPipe : locale}}</span>
+                                            <span class="info-list-item" [ngClass]="{'hide': (documents[key][params.DISCLOSURE_STATUS] | filter) == ''}"><span class="info-list-title">{{params.DISCLOSURE_STATUS | i18n : i18nService}}: </span>{{documents[key][params.DISCLOSURE_STATUS]}}</span>
+                                            <span class="info-list-item" [ngClass]="{'hide': (documents[key][params.AUTHORS] | filter) == ''}"><span class="info-list-title">{{params.AUTHORS | i18n : i18nService}}: </span>{{documents[key][params.AUTHORS] | arraytostring : 'author'}}</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div [class.hide]="!isDocuments" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <ul *ngIf="pager.pages && pager.pages.length" class="pagination" style="cursor: pointer">
+                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                        <a data-customlink="sp:footer" (click)="setPage(1, scrollTo)"><i [class]="leftArrow" aria-hidden="true"></i><i [class]="leftArrow" aria-hidden="true"></i></a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === 1}">
+                        <a data-customlink="sp:footer" (click)="setPage(pager.currentPage - 1, scrollTo)"><i [class]="leftArrow" aria-hidden="true"></i></a>
+                    </li>
+                    <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+                        <a data-customlink="sp:footer" (click)="setPage(page, scrollTo)">{{page}}</a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                        <a data-customlink="sp:footer" (click)="setPage(pager.currentPage + 1, scrollTo)"><i [class]="rightArrow" aria-hidden="true"></i></a>
+                    </li>
+                    <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+                        <a data-customlink="sp:footer" (click)="setPage(pager.totalPages, scrollTo)"><i [class]="rightArrow" aria-hidden="true"></i><i [class]="rightArrow" aria-hidden="true"></i></a>
+                    </li>
+                </ul>
+            </div>
+        </div>   
+    </div>
+</div>                                      

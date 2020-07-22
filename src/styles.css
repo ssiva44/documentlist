@@ -1,0 +1,224 @@
+.disable-click  {
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    text-decoration: none !important;
+    color: #787878!important;
+  }
+  .event-disable-click {
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+    text-decoration: none !important;
+    color: #000!important;
+  }
+  .mouse-pointer {
+    cursor: pointer
+  }
+  .submit-btn a>span {
+    padding: 9px 9px 10px 12px;
+    color: #fff;
+  }
+  .ajax-div {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    background-color: grey;
+    opacity: .8
+  }
+  .ajax-loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -32px;
+    margin-top: -32px;
+    display: block
+  }
+  .search-comp {  
+    cursor: pointer !important; 
+    pointer-events: all !important;
+    color: #ec553a !important;  
+    font-size: 0.95em !important;
+    padding: 9px 12px 8px 16px !important;
+  }
+  .sidebar-list .submit-btn i.fa.fa-caret-right {
+    color: #fff;
+    padding-left: 14px;
+    padding-top: 3px;
+    font-size: 30px;
+  }
+  .sidebar-list .submit-btn i.fa.fa-caret-left {
+    color: #fff;
+    padding-left: 10px;
+    padding-top: 3px;
+    font-size: 30px;
+  }
+  
+  .sidebar-list .submit-btn i.fa.fa-times {
+    color: #fff;
+    padding-left: 13px;
+    padding-top: 10px;
+  }
+  ._loop_btn_secondary:hover, ._loop_btn_secondary.hover, ._loop_btn_secondary.active {
+      color: #ffffff !important;
+      background-color: #333333 !important;
+      border:none !important;
+  }
+  .sidebar-list .submit-btn {
+      position: relative !important;
+  }
+  .sidebar-list .submit-btn span.fa.fa-play {
+      border:none !important;
+      left: 0px !important;
+      top: 0px !important;
+      font-size: 16px;
+  }
+  .card-v4-section .card-wrapper img {
+      width: 100%;
+      height: auto;
+  }
+  .card-v4-section .card-wrapper .fa-play {
+      padding: 3px 0 0 3px !important;
+  }
+  .sidebar-sublist li a.remove-btn {
+      display: inline-block;
+  }
+  .sidebar-sublist li a.remove-btn span.fa-times-circle-o {
+      color: #004c92;
+  }
+  .search-submit-icon {  
+    cursor: pointer !important; 
+    pointer-events: all !important;
+    color: #ec553a !important;
+  }
+  .sidebar-sublist .form-control {
+    height: 34px !important;
+    border-radius: 3px !important;
+  }
+  .sidebar-heading h4 {
+   padding-left: 5px;
+  }
+  .mydp .selection {
+      background-color: #fafdff !important;
+      padding-left: 10px !important;   
+  }
+  
+  .hammer, .small-headline {
+      text-transform: none !important;
+  }
+  #sidebar-wrapper {
+    overflow-y: hidden !important;
+  }
+  .sidebar-list {
+    background-color:white;
+    position: relative;
+  }
+  @media (max-width: 991px) and (min-width: 320px) {
+  
+   .equal-height {
+      display:block;
+   }
+  .sidebar-nav-mobile .sidebar-list ul li a,
+      .sidebar-collapse .sidebar-list ul li a {
+      padding: 16px 0px 16px 0px;
+      display: inline-block;
+  }
+   .sidebar-sublist li a span.fa.fa-times-circle-o {
+      color: #004c92 !important;
+  }
+  
+  .refine-select-button {
+      display: inline-flex;
+  }
+  
+  .refine-select-button .delete-item {
+      padding-top: 1px;
+  }
+  .sidebar-nav-mobile .sidebar-heading {   
+      padding: 8px 16px 6px 16px !important;
+  }
+  .sidebar-list .submit-btn a i.fa.fa-play {
+      font-size: 12pt;
+      color: #fff;
+      padding-left: 12px;
+      top: 0px;
+      position: absolute;
+      padding-top: 10px;
+  }
+  table.m-spec-date {
+      margin: 16px 0px 16px 0px;
+      display: table;
+      width: 100%;
+  }
+  table.m-spec-date tr {    
+    display: table-row; 
+    vertical-align: bottom;
+  }
+  table.m-spec-date tr td {    display: table-cell; } 
+  
+  table.m-spec-date tr td div._loop_primary_input {
+      width: auto !important;
+  }
+  
+  .submit-btn {    
+      height: 34px !important;    
+      margin-bottom: 19px !important;
+  }
+  }
+  @media (max-width: 480px) and (min-width: 320px) {
+  .card-v4-section .card-wrapper img {
+      width: 100%;
+      height: auto;
+  }
+  .sidebar-nav-mobile .sidebar-heading h4 {
+    font-size: 16px !important;
+  }
+  .sidebar-nav-mobile .sidebar-heading {   
+      padding: 8px 16px 6px 16px !important;
+  }
+  table.m-spec-date tr td div._loop_primary_input .mydp .selectiongroup input{
+      font-size: 13px !important;
+  }
+  }
+
+  .projects-list-tabs {
+    text-transform: none !important;
+  }
+  chart {
+    display: block;
+    width:100%;
+    height:100%;
+  }
+
+/* 7-3-2018*/
+  .m-spec-date td{
+      padding:0;
+  }
+
+  .m-spec-date ._loop_primary_input{
+      min-width:103px;
+  }
+
+  .m-spec-date ._loop_primary_input label{
+    display:block
+  }
+
+  .m-spec-date .mydp{
+      border:0;
+  }
+
+  .m-spec-date .mydp .btnpicker{
+      background:none
+  }
+
+  .m-spec-date .selectiongroup{
+    font-weight: 600;
+    color: #787878;
+    background-color: #fafdff !important;
+    border: 1px solid #d8e7f5 !important;
+  }
+
+  .m-spec-date .submit-btn a{
+      padding:0 !important
+  }

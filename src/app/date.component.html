@@ -1,0 +1,18 @@
+<ul class="sidebar-list">
+	<li class="sidebar-list-item">
+		<a class="sidebar-link" (click)="updateIsCollapsed(!isCollapsed)" attr.aria-expanded="{{!isCollapsed}}">{{'specificDateRange' | i18n : i18nService}}</a>
+	</li>
+	<ul class="sidebar-sublist" [ngClass]="{'collapse' : collapseAnimation == 'load'}" [@dateFadeInOut]="collapseAnimation">		
+		<div class="_loop_primary_input">
+			<label class="input_text">{{'startDate' | i18n : i18nService}}</label>
+			<my-date-picker [options]="startDateOptions" (dateChanged)="onStartDateChanged($event)" [placeholder]="placeholder" [selDate]="startDate"></my-date-picker>
+		</div>
+		<div class="_loop_primary_input">	
+			<label class="input_text">{{'endDate' | i18n : i18nService}}</label>
+			<my-date-picker [options]="endDateOptions" (dateChanged)="onEndDateChanged($event)" [placeholder]="placeholder" [selDate]="endDate"></my-date-picker>
+		</div>
+		<div class="submit-btn">              
+			<a style="cursor: pointer" (click)="onDateRange(); false"><i [ngClass]="dateIcon"></i></a>				
+		</div>		
+	</ul>
+</ul>

@@ -1,0 +1,12 @@
+<div class="row full-row-white-components" style="padding: 32px 0px 32px 0px;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-xs-12">
+        <div class="ajax-div" *ngIf="loading">    
+          <img src="{{imagePath}}" class="ajax-loader" alt="Loading"/>
+        </div>
+        <documents [locale]="locale" [documentsApi]="documentsApi" [documentsPath]="documentsPath" [advancedSearchPath]="advancedSearchPath" [runmode]="runmode" [nodataLink]="nodataLink" (updatedLoader)="updateLoader($event)"></documents>        
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="col-xs-12 hidden-lg hidden-md">	
+	<div id="refine-collapse1" class="sidebar-collapse proj-mobile-facet" [@refineFadeInOut]="isCollapsed">
+		<div class="sidebar-slider">
+			<ul class="padd-16 col-xs-12 col-sm-12" [ngClass]="{'collapse' : isAllFacets}">
+				<li class="sidebar-list-item" (click)="onSelectDate()">
+					<a class="sidebar-menu-trigger">{{'specificDateRange' | i18n : i18nService}}</a>
+				</li>	
+				<li class="sidebar-list-item" (click)="onSelectFacetName(facet.facetName)" *ngFor="let facet of facets">
+					<a class="sidebar-menu-trigger">{{facet.facetName | i18n : i18nService}}</a>
+				</li>			
+			</ul>
+			<ul class="padd-16 col-xs-12 col-sm-12">
+				<li class="sidebar-list" [ngClass]="{'collapse' : isDate}">
+					<ul>
+						<li><a class="sidebar-menu-trigger-back" (click)="onBack()"><b>{{'back' | i18n : i18nService}}</b></a></li>
+						
+						<li>	
+							<div class="clear"></div>							
+							<table class="m-spec-date">
+								<tbody>
+									<tr style="vertical-align: bottom;">
+										<td>
+											<div class="_loop_primary_input">
+												<label>{{'startDate' | i18n : i18nService}}</label>
+												<my-date-picker  [options]="startDateOptions" (dateChanged)="onStartDateChanged($event)" [placeholder]="datePlaceholder" [selDate]="startDate"></my-date-picker>
+											</div>
+										</td>
+								
+										<td>
+											<div class="_loop_primary_input">	
+												<label>{{'endDate' | i18n : i18nService}}</label>
+												<my-date-picker [options]="endDateOptions" (dateChanged)="onEndDateChanged($event)" [placeholder]="datePlaceholder" [selDate]="endDate"></my-date-picker>
+											</div>
+										</td>
+										<td  style="padding:0">
+											<div class="submit-btn">
+												<a (click)="onDateRange(); false"><i [ngClass]="dateIcon"></i></a>
+											</div>
+										</td>										
+									</tr>
+								</tbody>
+							</table>							
+						</li>						
+					</ul>
+				</li><!-- end Timeframe-->
+
+				<li class="sidebar-list" [ngClass]="{'collapse' : isFacets}">
+					<ul *ngFor="let facet of facets | mobileFacetContains : facetName; let i = index;">
+						<li><a class="sidebar-menu-trigger-back" (click)="onBack()"><b>{{'back' | i18n : i18nService}}</b></a></li>						
+						<li *ngFor="let facetItem of facet.facetItems | facetContains : limitFacets : i">
+							<div class="_loop_checkbox">
+								<input data-customlink="sf:body content" class="_loop_primary_checkbox" type="checkbox" [checked]="selectedFacets | checked : facet.facetName : facetItem.name" (change)="onFacetItem(facet.facetName, facetItem.name)" />
+								<label for="srchwtn">
+									<div class="sidebar-sublist_wrapper">
+										<span class="sidebar-sublist-item">{{facetItem.label}} &nbsp;</span>
+										<span>({{facetItem.count}})</span>
+									</div>
+								</label>
+							</div>
+						</li>
+						<div class="expand-link" *ngIf="(facet.facetItems | length) > 6">
+							<a *ngIf="!(limitFacets | contains : i)" (click)="onSeeMore(i); false">{{'seeMore' | i18n : i18nService}}</a>
+							<a *ngIf="(limitFacets | contains : i)" (click)="onSeeLess(i); false">{{'seeLess' | i18n : i18nService}}</a>
+						</div>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

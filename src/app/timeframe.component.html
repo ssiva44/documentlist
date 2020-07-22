@@ -1,0 +1,12 @@
+<ul class="sidebar-list">
+	<li class="sidebar-list-item">
+		<a class="sidebar-link" (click)="updateIsCollapsed(!isCollapsed)" attr.aria-expanded="{{!isCollapsed}}">{{timeframe}}</a>
+	</li>
+	<ul class="sidebar-sublist" [ngClass]="{'collapse' : collapseAnimation == 'load'}" [@timeframeFadeInOut]="collapseAnimation">
+		<li *ngFor="let timeframe of timeFrames">
+			<a data-customlink="sf:body content" (click)="onSelectTimeFrame(timeframe.value); false" [ngClass]="{'disable-click': (selectedTimeFrame == timeframe.label)}">
+				<span class="sidebar-sublist-item">{{timeframe.label}}&nbsp;</span><span class="list-item-num"></span>
+			</a>			
+		</li>	  
+	</ul>
+</ul>
